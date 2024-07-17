@@ -34,3 +34,11 @@ new zigbee.WeatherSensorZigbee("bedroom_climate_sensor", {
         console.log(sensor.temperature, sensor.humidity)
     }
 })
+
+new zigbee.PowerSensorZigbee("house_power_sensor", {
+    updateCallback: (sensor: zigbee.PowerSensorZigbee) => {
+        writeApi.writePoint(new Point('House Power Consumption')
+            .tag("sensor", sensor.name)
+            .floatField('W', sensor.power))
+    }
+})
