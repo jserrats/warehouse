@@ -51,3 +51,12 @@ new esphome.SensorESPHome("datacenter", "weight_jaume", {
         telegram.info(`New weight measure taken \`${sensor.state}\` Kg`)
     }
 })
+
+new esphome.SensorESPHome("datacenter", "weight_judit", {
+    updateCallback: (sensor: esphome.SensorESPHome) => {
+        writeApi.writePoint(new Point('Judit Weight')
+            .tag("sensor", sensor.name)
+            .floatField('Kg', sensor.state))
+        telegram.info(`New weight measure taken \`${sensor.state}\` Kg`)
+    }
+})
