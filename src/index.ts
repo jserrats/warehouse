@@ -3,7 +3,7 @@ import { zigbee, getEnvVariable, esphome, telegram } from "mqtt-assistant"
 import { InfluxDB, Point } from '@influxdata/influxdb-client'
 
 
-console.log("[i] Starting Warehouse")
+telegram.info("Starting Warehouse")
 
 const token = getEnvVariable("INFLUXDB_TOKEN")
 const org = getEnvVariable("INFLUXDB_ORG")
