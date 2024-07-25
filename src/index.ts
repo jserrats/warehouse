@@ -1,5 +1,5 @@
 import 'dotenv/config'
-import { zigbee, getEnvVariable } from "mqtt-assistant"
+import { zigbee, getEnvVariable, esphome, telegram } from "mqtt-assistant"
 import { InfluxDB, Point } from '@influxdata/influxdb-client'
 
 
@@ -40,5 +40,14 @@ new zigbee.PowerSensorZigbee("house_power_sensor", {
         writeApi.writePoint(new Point('House Power Consumption')
             .tag("sensor", sensor.name)
             .floatField('W', sensor.power))
+    }
+})
+
+new esphome.SensorESPHome("datacenter", "weight_jaume", {
+    updateCallback: (sensor: esphome.SensorESPHome) => {
+        writeApi.writePoint(new Point('Jaume Weight')
+            .tag("sensor", sensor.name)
+            .floatField('Kg', sensor.state))
+        telegram.info(`New weight measure taken \`${sensor.state}\` Kg`)
     }
 })
