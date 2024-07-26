@@ -35,6 +35,15 @@ new zigbee.WeatherSensorZigbee("bedroom_climate_sensor", {
     }
 })
 
+new esphome.SensorESPHome("datacenter-power", "datacenter_power", {
+    updateCallback: (sensor: zigbee.PowerSensorZigbee) => {
+        writeApi.writePoint(new Point('Datacenter Power Consumption')
+            .tag("room", "datacenter")
+            .tag("sensor", sensor.name)
+            .floatField('W', sensor.power))
+    }
+})
+
 new zigbee.PowerSensorZigbee("house_power_sensor", {
     updateCallback: (sensor: zigbee.PowerSensorZigbee) => {
         writeApi.writePoint(new Point('House Power Consumption')
