@@ -60,3 +60,12 @@ new esphome.SensorESPHome("datacenter", "weight_judit", {
         telegram.info(`New weight measure taken \`${sensor.state}\` Kg`)
     }
 })
+
+new esphome.SensorESPHome("airquality", "pm_2_5", {
+    updateCallback: (sensor: esphome.SensorESPHome) => {
+        writeApi.writePoint(new Point('PM 2.5µm')
+            .tag("room", "studio")
+            .tag("sensor", sensor.name)
+            .floatField('µg/m3', sensor.state))
+    }
+})
