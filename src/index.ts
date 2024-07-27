@@ -49,11 +49,11 @@ new zigbee.WeatherSensorZigbee("studio_climate_sensor", {
 })
 
 new esphome.SensorESPHome("datacenter-power", "datacenter_power", {
-    updateCallback: (sensor: zigbee.PowerSensorZigbee) => {
+    updateCallback: (sensor:  esphome.SensorESPHome) => {
         writeApi.writePoint(new Point('Energy')
             .tag("room", "datacenter")
             .tag("sensor", sensor.name)
-            .floatField('W', sensor.power))
+            .floatField('W', sensor.state))
     }
 })
 
