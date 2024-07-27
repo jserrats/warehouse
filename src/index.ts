@@ -49,7 +49,7 @@ new zigbee.WeatherSensorZigbee("studio_climate_sensor", {
 })
 
 new esphome.SensorESPHome("datacenter-power", "datacenter_power", {
-    updateCallback: (sensor:  esphome.SensorESPHome) => {
+    updateCallback: (sensor: esphome.SensorESPHome) => {
         writeApi.writePoint(new Point('Energy')
             .tag("room", "datacenter")
             .tag("sensor", sensor.name)
@@ -69,7 +69,7 @@ new zigbee.PowerSensorZigbee("house_power_sensor", {
 new esphome.SensorESPHome("datacenter", "weight_jaume", {
     updateCallback: (sensor: esphome.SensorESPHome) => {
         writeApi.writePoint(new Point('Body')
-             .tag("person", "Jaume")
+            .tag("person", "Jaume")
             .tag("sensor", sensor.name)
             .floatField('Kg', sensor.state))
         telegram.info(`New weight measure taken \`${sensor.state}\` Kg`)
@@ -82,7 +82,7 @@ new esphome.SensorESPHome("datacenter", "weight_judit", {
             .tag("person", "Judit")
             .tag("sensor", sensor.name)
             .floatField('Kg', sensor.state))
-        telegram.info(`New weight measure taken \`${sensor.state}\` Kg`)
+        telegram.info({ message: `New weight measure taken \`${sensor.state}\` Kg`, recipient: "user" })
     }
 })
 
