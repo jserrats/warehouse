@@ -17,8 +17,9 @@ writeApi.useDefaultTags({ host: 'warehouse' })
 
 new zigbee.WeatherSensorZigbee("livingroom_climate_sensor", {
     updateCallback: (sensor: zigbee.WeatherSensorZigbee) => {
-        writeApi.writePoint(new Point('Livingroom climate')
+        writeApi.writePoint(new Point('Weather')
             .tag("sensor", sensor.name)
+            .tag("room", "living_room")
             .floatField('C degrees', sensor.temperature)
             .floatField('% Humidity', sensor.humidity))
         console.log(sensor.temperature, sensor.humidity)
@@ -27,7 +28,19 @@ new zigbee.WeatherSensorZigbee("livingroom_climate_sensor", {
 
 new zigbee.WeatherSensorZigbee("bedroom_climate_sensor", {
     updateCallback: (sensor: zigbee.WeatherSensorZigbee) => {
-        writeApi.writePoint(new Point('Bedroom climate')
+        writeApi.writePoint(new Point('Weather')
+            .tag("room", "bedroom")
+            .tag("sensor", sensor.name)
+            .floatField('C degrees', sensor.temperature)
+            .floatField('% Humidity', sensor.humidity))
+        console.log(sensor.temperature, sensor.humidity)
+    }
+})
+
+new zigbee.WeatherSensorZigbee("studio_climate_sensor", {
+    updateCallback: (sensor: zigbee.WeatherSensorZigbee) => {
+        writeApi.writePoint(new Point('Weather')
+            .tag("room", "studio")
             .tag("sensor", sensor.name)
             .floatField('C degrees', sensor.temperature)
             .floatField('% Humidity', sensor.humidity))
@@ -37,7 +50,7 @@ new zigbee.WeatherSensorZigbee("bedroom_climate_sensor", {
 
 new esphome.SensorESPHome("datacenter-power", "datacenter_power", {
     updateCallback: (sensor: zigbee.PowerSensorZigbee) => {
-        writeApi.writePoint(new Point('Datacenter Power Consumption')
+        writeApi.writePoint(new Point('Energy')
             .tag("room", "datacenter")
             .tag("sensor", sensor.name)
             .floatField('W', sensor.power))
@@ -46,7 +59,8 @@ new esphome.SensorESPHome("datacenter-power", "datacenter_power", {
 
 new zigbee.PowerSensorZigbee("house_power_sensor", {
     updateCallback: (sensor: zigbee.PowerSensorZigbee) => {
-        writeApi.writePoint(new Point('House Power Consumption')
+        writeApi.writePoint(new Point('Energy')
+            .tag("room", "home")
             .tag("sensor", sensor.name)
             .floatField('W', sensor.power))
     }
@@ -54,7 +68,8 @@ new zigbee.PowerSensorZigbee("house_power_sensor", {
 
 new esphome.SensorESPHome("datacenter", "weight_jaume", {
     updateCallback: (sensor: esphome.SensorESPHome) => {
-        writeApi.writePoint(new Point('Jaume Weight')
+        writeApi.writePoint(new Point('Body')
+             .tag("person", "Jaume")
             .tag("sensor", sensor.name)
             .floatField('Kg', sensor.state))
         telegram.info(`New weight measure taken \`${sensor.state}\` Kg`)
@@ -63,7 +78,8 @@ new esphome.SensorESPHome("datacenter", "weight_jaume", {
 
 new esphome.SensorESPHome("datacenter", "weight_judit", {
     updateCallback: (sensor: esphome.SensorESPHome) => {
-        writeApi.writePoint(new Point('Judit Weight')
+        writeApi.writePoint(new Point('Body')
+            .tag("person", "Judit")
             .tag("sensor", sensor.name)
             .floatField('Kg', sensor.state))
         telegram.info(`New weight measure taken \`${sensor.state}\` Kg`)
@@ -72,9 +88,9 @@ new esphome.SensorESPHome("datacenter", "weight_judit", {
 
 new esphome.SensorESPHome("airquality", "pm_2_5", {
     updateCallback: (sensor: esphome.SensorESPHome) => {
-        writeApi.writePoint(new Point('PM 2.5µm')
+        writeApi.writePoint(new Point('Weather')
             .tag("room", "studio")
             .tag("sensor", sensor.name)
-            .floatField('µg/m3', sensor.state))
+            .floatField('PM 2.5 µg/m3', sensor.state))
     }
 })
