@@ -66,7 +66,7 @@ new zigbee.PowerSensorZigbee("house_power_sensor", {
     }
 })
 
-new esphome.SensorESPHome("datacenter", "weight_jaume", {
+new esphome.SensorESPHome("scale", "weight_jaume", {
     updateCallback: (sensor: esphome.SensorESPHome) => {
         writeApi.writePoint(new Point('Body')
             .tag("person", "Jaume")
@@ -76,7 +76,7 @@ new esphome.SensorESPHome("datacenter", "weight_jaume", {
     }
 })
 
-new esphome.SensorESPHome("datacenter", "weight_judit", {
+new esphome.SensorESPHome("scale", "weight_judit", {
     updateCallback: (sensor: esphome.SensorESPHome) => {
         writeApi.writePoint(new Point('Body')
             .tag("person", "Judit")
