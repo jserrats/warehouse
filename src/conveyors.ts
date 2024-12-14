@@ -3,7 +3,7 @@ import { InfluxDB, Point } from '@influxdata/influxdb-client'
 import { getEnvVariable } from "mqtt-assistant"
 
 import 'dotenv/config'
-import { NumericSensor } from "mqtt-assistant/dist/components/interfaces/numeric-sensor";
+import { interfaces } from "mqtt-assistant";
 
 
 const token = getEnvVariable("INFLUXDB_TOKEN")
@@ -17,7 +17,7 @@ const writeApi = client.getWriteApi(org, bucket)
 writeApi.useDefaultTags({ host: 'warehouse' })
 
 export class FloatConveyor {
-    constructor(sensor: NumericSensor, pointName: string, tags: Record<string, string>, callback?: (sensor: NumericSensor) => void) {
+    constructor(sensor: interfaces.NumericSensor, pointName: string, tags: Record<string, string>, callback?: (sensor: interfaces.NumericSensor) => void) {
         globalEventManager.on(sensor.events.state,
             () => {
                 let point = new Point(pointName)

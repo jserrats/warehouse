@@ -31,3 +31,6 @@ new FloatConveyor(juditWeight, "Body", { person: "Judit" }, (sensor) => { telegr
 
 const studioAirQuality = new esphome.SensorESPHome("airquality", "pm_2_5", "PM 2.5 µg/m3")
 new FloatConveyor(studioAirQuality, "Weather", { room: "studio" })
+
+const studioCO2 = new esphome.SensorESPHome("datacenter", "co2", "CO2 ppm")
+new FloatConveyor(studioCO2, "Weather", { room: "studio" })

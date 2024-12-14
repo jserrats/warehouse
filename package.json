@@ -6,7 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build-run": "tsc && node dist/src/index.js",
-    "build": "tsc"
+    "build": "tsc",
+    "deploy": "npm run build && docker build . && git add . && git commit -m 'deploying changes' && git push"
   },
   "author": "jserrats.xyz",
   "license": "ISC",
