@@ -17,6 +17,10 @@ const studioAirSensor = new zigbee.sensors.air.TH01Z("studio_climate_sensor")
 new FloatConveyor(studioAirSensor.temperature, "Weather", { room: "studio" })
 new FloatConveyor(studioAirSensor.humidity, "Weather", { room: "studio" })
 
+const indoorLivingroomAirSensor = new zigbee.sensors.air.TH01Z("indoor_livingroom_climate_sensor")
+new FloatConveyor(indoorLivingroomAirSensor.temperature, "Weather", { room: "indoor_living_room" })
+new FloatConveyor(indoorLivingroomAirSensor.humidity, "Weather", { room: "indoor_living_room" })
+
 const powerDatacenter = new esphome.SensorESPHome("datacenter-power", "datacenter_power", "W")
 new FloatConveyor(powerDatacenter, "Energy", { room: "datacenter" })
 
